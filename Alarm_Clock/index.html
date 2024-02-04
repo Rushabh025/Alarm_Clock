@@ -10,10 +10,21 @@
             <h1>Alarm Clock</h1>
         </div>
         <div>
-            <h2>Current Time</h2>
+            <h2>Current Time : </h2>
+            <span id="datetime"></span>
+        </div>
+        <div>
+            <h3>Set Alarm</h3>
+            <form id="setAlarm" action="">
+                <input type="number" id="hour" name="HH" placeholder="HH"> :
+                <input type="number" id="minute" name="MM" placeholder="MM"> :
+                <input type="number" id="second" name="SS" placeholder="SS"><br><br>
+                <input type="button" onclick="setUserAlarm()" value="Set Alarm">
+            </form>
         </div>
         <div>
             <h3>Alarms</h3>
+            <span id="alarms"></span>
         </div>
     </div>
     
