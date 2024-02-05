@@ -1,37 +1,109 @@
-// create a function to update the date and time
-function updateDateTime() {
+//creating an array to keep list of alarms set by user
+let alarmList = [] 
 
-    // create a new `Date` object
-    const date = new Date();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var second = date.getSeconds();
-    var AmPm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+ minutes : minutes;
+//initializing alarm ringtone
+let alarmRingtone = new Audio("audio/bedside-clock-alarm.mp3")
 
-    // get the current date and time as a string
-    const currentDateTime = hours + ':' + minutes + ':' + second + ' '+ AmPm;
+//Reference for input values
+const hour = document.getElementById("hour");
+const minute = document.getElementById("minute");
+const second = document.getElementById("second");
 
-    // update the `textContent` property of the `span` element with the `id` of `datetime`
-    document.querySelector('#datetime').textContent = currentDateTime;
+//appending zeroes for values entered less than 10
+hour.addEventListener("input", ()=>{
+  hour.value = checkTime(hour.value);
+});
+
+minute.addEventListener("input", ()=>{
+  minute.value = checkTime(minute.value);
+});
+
+second.addEventListener("input", ()=>{
+  second.value = checkTime(second.value);
+});
+
+//function to show current time 
+function getCurrentTime() {
+  const today = new Date();
+
+  let h = today.getHours();
+  let m = today.getMinutes();
+  let s = today.getSeconds();
+  let ampm = "AM";
+
+  //setting time to 12 hr format
+  if (h >= 12) {
+    ampm = "PM";
+  }
+  if(h > 12){
+    h = h - 12;
+  }
+  //appending zeroes for values less than 10
+  h = checkTime(h);
+  m = checkTime(m);
+  s = checkTime(s);
+
+  //set current time in the div
+  document.getElementById('currTime').innerHTML = h + ":" + m + ":" + s + " " + ampm;
+
+  //to ring alarm
+  alarmList.forEach((alarm) => {
+      if (`${alarm}`=== `${h}:${m}:${s} ${ampm}`) {
+        alarmRingtone.play();
+        alarmRingtone.loop = true;
+        //timeout function to show alert when alarm goes off
+        setTimeout(function(){
+              alarmRingtone.pause();
+              alert("The alarm went Off!")
+        }, 30 *1000);
+      }
+  });
+  //to keep the current time updating
+  setTimeout(getCurrentTime, 1000);
 }
 
-// call the `updateDateTime` function every second
-setInterval(updateDateTime, 1000);
+//function to append zeroes before single digit of hour/min/sec
+function checkTime(value) {
+  if (value < 10)
+    value = "0" + value;
+  return value;
+}
+
+//function to add alarms in alarms list
+function setAlarm() {
+  let h = hour.value;
+  let m = minute.value;
+  let s = second.value;
+  let ampm = document.getElementById("ampm").value;
+  
+  alarmList.push(h + ":" + m + ":" + s+" "+ampm)
+  createAlarmList();
+}
 
 
-function setUserAlarm() {
-    document.getElementById("setAlarm").submit();
-    var Hours = document.getElementById("hour").value;
-    var Minutes = document.getElementById("minute").value;
-    var Seconds = document.getElementById("second").value;
+//create alarm list 
+function createAlarmList() {
+  
+  document.getElementById("alarmsList").innerHTML = '';
+  for (var i in alarmList) {
 
-    // get the current date and time as a string
-    const alarmSet = Hours + ':' + Minutes + ':' + Seconds;
+    //adding delete button for each alarm
+    let button = document.createElement("input");
+    button.type="button";
+    button.value="Delete";
+    button.id="deleteButton";
+    
+    //removing the deleted alarm from alarm list
+    button.onclick=function(event){
+      document.getElementById("alarmsList").removeChild(event.target.parentElement);
+      alarmList = alarmList.filter(function (a) {
+        return a !== event.target.parentElement.innerText;
+      });
+    }
 
-    // update the `textContent` property of the `span` element with the `id` of `datetime`
-    document.querySelector('#alarms').textContent = alarmSet;
-
+    //adding list item for each alarm
+    let list = document.createElement("li");
+    list.innerText = alarmList[i];
+    document.getElementById("alarmsList").appendChild(list).appendChild(button); 
+  }
 }
