@@ -2,25 +2,25 @@
 let alarmList = [] 
 
 //initializing alarm ringtone
-let alarmRingtone = new Audio("audio/bedside-clock-alarm.mp3")
+let alarmRingtone = new Audio("audio\bedside-clock-alarm.mp3")
 
 //Reference for input values
 const hour = document.getElementById("hour");
 const minute = document.getElementById("minute");
 const second = document.getElementById("second");
 
-//appending zeroes for values entered less than 10
-hour.addEventListener("input", ()=>{
-  hour.value = checkTime(hour.value);
-});
+// appending zeroes for values entered less than 10
+// hour.addEventListener("input", ()=>{
+//   hour.value = checkTime(hour.value);
+// });
 
-minute.addEventListener("input", ()=>{
-  minute.value = checkTime(minute.value);
-});
+// minute.addEventListener("input", ()=>{
+//   minute.value = checkTime(minute.value);
+// });
 
-second.addEventListener("input", ()=>{
-  second.value = checkTime(second.value);
-});
+// second.addEventListener("input", ()=>{
+//   second.value = checkTime(second.value);
+// });
 
 //function to show current time 
 function getCurrentTime() {
