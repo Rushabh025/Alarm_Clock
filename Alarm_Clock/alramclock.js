@@ -103,7 +103,7 @@ function createAlarmList() {
 
     //adding list item for each alarm
     let list = document.createElement("li");
-    list.innerText = alarmList[i];
+    list.innerHTML = '<li class="list-group-item">'+alarmList[i]+'</li>';
     document.getElementById("alarmsList").appendChild(list).appendChild(button); 
   }
 }
