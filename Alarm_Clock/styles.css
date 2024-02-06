@@ -1,5 +1,5 @@
 body{
-    background-color: #377dff;
+    background-color: #116e57;
     font-family:  monospace;
 }
 
@@ -17,7 +17,7 @@ body{
     height: 70%;
     position: relative;
     left: 10%;
-    background-color:  #f9f2ad; 
+    background-color:  #f9cbad; 
 }
 
 #currTime{
