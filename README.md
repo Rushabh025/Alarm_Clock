@@ -1,4 +1,7 @@
 # Alarm_Clock
+
+Demo : https://rushabh025.github.io/Alarm_Clock/
+
 ## Problem statement 
 Create an alarm clock. Use ONLY vanilla javascript, no libraries or frameworks allowed for Javascript (you can use any css framework like Bootstrap).
 
@@ -30,3 +33,8 @@ Create an alarm clock. Use ONLY vanilla javascript, no libraries or frameworks a
 
 ![Alarm_clock_input](https://github.com/Rushabh025/Alarm_Clock/assets/58899214/05328816-3153-4908-ab59-d7d9dcf1e2ad)
 
+## Author:
++ Rushabh Mahawarkar
++ Email Id : rushabh.mahawarkar@gmail.com
++ Contact Number : 9082466183
++ LinkedIn : https://www.linkedin.com/in/rushabh-mahawarkar-7727301a3/
