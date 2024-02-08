@@ -9,49 +9,37 @@ const hour = document.getElementById("hour");
 const minute = document.getElementById("minute");
 const second = document.getElementById("second");
 
-// appending zeroes for values entered less than 10
-hour.addEventListener("input", ()=>{
-  hour.value = checkTime(hour.value);
-});
-
-minute.addEventListener("input", ()=>{
-  minute.value = checkTime(minute.value);
-});
-
-second.addEventListener("input", ()=>{
-  second.value = checkTime(second.value);
-});
-
 //function to show current time 
 function getCurrentTime() {
   const today = new Date();
 
-  let h = today.getHours();
-  let m = today.getMinutes();
-  let s = today.getSeconds();
-  let ampm = "AM";
+  let hrs = today.getHours();
+  let min = today.getMinutes();
+  let sec = today.getSeconds();
+  let AmPm = "AM";
 
   //setting time to 12 hr format
-  if (h >= 12) {
-    ampm = "PM";
+  if (hrs >= 12) {
+    AmPm = "PM";
   }
-  if(h > 12){
-    h = h - 12;
+  if(hrs > 12){
+    hrs = hrs - 12;
   }
+
   //appending zeroes for values less than 10
-  h = checkTime(h);
-  m = checkTime(m);
-  s = checkTime(s);
+  hrs = checkTime(hrs);
+  min = checkTime(min);
+  sec = checkTime(sec);
 
   //set current time in the div
-  document.getElementById('currTime').innerHTML = h + ":" + m + ":" + s + " " + ampm;
+  document.getElementById('currTime').innerHTML = hrs + ":" + min + ":" + sec + " " + AmPm;
 
   //to ring alarm
   alarmList.forEach((alarm) => {
-      if (`${alarm}`=== `${h}:${m}:${s} ${ampm}`) {
+      if (`${alarm}`=== `${hrs}:${min}:${sec} ${AmPm}`) {
         alarmRingtone.play();
         alarmRingtone.loop = true;
-        //timeout function to show alert when alarm goes off
+        // timeout function to show alert when alarm goes off
         setTimeout(function(){
               alarmRingtone.pause();
               alert("The alarm went Off!")
@@ -74,12 +62,15 @@ function setAlarm() {
   let h = hour.value;
   let m = minute.value;
   let s = second.value;
-  let ampm = document.getElementById("ampm").value;
+  let AmPm = document.getElementById("ampm").value;
+
+  h = checkTime(h);
+  m = checkTime(m);
+  s = checkTime(s);
   
-  alarmList.push(h + ":" + m + ":" + s+" "+ampm)
+  alarmList.push(h + ":" + m + ":" + s +" "+ AmPm)
   createAlarmList();
 }
-
 
 //create alarm list 
 function createAlarmList() {
@@ -103,7 +94,7 @@ function createAlarmList() {
 
     //adding list item for each alarm
     let list = document.createElement("li");
-    list.innerHTML = '<li class="list-group-item">'+alarmList[i]+'</li>';
+    list.innerHTML = '<li class="list-group-item">'+ alarmList[i] +'</li>';
     document.getElementById("alarmsList").appendChild(list).appendChild(button); 
   }
 }
